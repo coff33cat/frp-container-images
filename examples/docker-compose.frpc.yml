@@ -1,0 +1,20 @@
+# frpc, the side that runs next to the services you want to reach.
+#
+#   curl -O https://raw.githubusercontent.com/coff33cat/frp-container-images/master/examples/frpc.toml
+#   docker compose -f docker-compose.frpc.yml up -d
+
+services:
+  frpc:
+    image: ghcr.io/coff33cat/frpc:latest
+    restart: unless-stopped
+    volumes:
+      - ./frpc.toml:/etc/frp/frpc.toml:ro
+    # frpc dials the proxied services itself, so it needs to be on a network
+    # that can reach them. Use `network_mode: host` instead when the targets
+    # listen on the host rather than in containers.
+    # networks:
+    #   - apps
+
+# networks:
+#   apps:
+#     external: true

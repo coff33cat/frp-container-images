@@ -1,0 +1,27 @@
+# Minimal frps configuration.
+#
+# Every available option is documented upstream:
+# https://github.com/fatedier/frp/blob/dev/conf/frps.full_example.toml
+
+# The port frpc clients connect to.
+bindPort = 7000
+
+# Where HTTP proxies (type = "http") are served. Terminate TLS in front of it
+# with a reverse proxy, or add vhostHTTPSPort and let frps serve TLS itself.
+vhostHTTPPort = 8080
+
+# Shared secret. Every client must present the same token.
+auth.method = "token"
+auth.token = "change-me"
+
+# With this set, clients can use `subdomain = "foo"` instead of spelling out
+# customDomains, and get foo.tunnel.example.com.
+# subDomainHost = "tunnel.example.com"
+
+# Dashboard. Drop this block if you do not want one running at all.
+webServer.addr = "0.0.0.0"
+webServer.port = 7500
+webServer.user = "admin"
+webServer.password = "change-me"
+
+log.level = "info"

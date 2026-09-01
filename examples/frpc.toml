@@ -1,0 +1,38 @@
+# Minimal frpc configuration.
+#
+# Every available option is documented upstream:
+# https://github.com/fatedier/frp/blob/dev/conf/frpc.full_example.toml
+
+serverAddr = "frps.example.com"
+serverPort = 7000
+
+auth.method = "token"
+auth.token = "change-me"
+
+# Local admin UI, useful for inspecting proxy status. Keep it off any public
+# interface.
+# webServer.addr = "127.0.0.1"
+# webServer.port = 7400
+# webServer.user = "admin"
+# webServer.password = "change-me"
+
+# Reach a TCP service through a port opened on the frps host.
+[[proxies]]
+name = "ssh"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 22
+remotePort = 6000
+
+# Reach an HTTP service through the frps vhost port. localIP is resolved inside
+# the frpc container, so it can be another compose service by name.
+[[proxies]]
+name = "web"
+type = "http"
+localIP = "web"
+localPort = 80
+customDomains = ["app.example.com"]
+
+# Proxies can also be split across separate files, which pairs well with
+# mounting a directory instead of a single file.
+# includes = ["/etc/frp/conf.d/*.toml"]

@@ -1,0 +1,20 @@
+# frps, the side that runs on a host with a public address.
+#
+#   curl -O https://raw.githubusercontent.com/coff33cat/frp-container-images/master/examples/frps.toml
+#   docker compose -f docker-compose.frps.yml up -d
+
+services:
+  frps:
+    image: ghcr.io/coff33cat/frps:latest
+    restart: unless-stopped
+    ports:
+      # Control connection from frpc.
+      - "7000:7000"
+      # HTTP vhost traffic (vhostHTTPPort).
+      - "8080:8080"
+      # remotePort of the example ssh proxy.
+      - "6000:6000"
+      # Dashboard, deliberately not published on a public interface.
+      - "127.0.0.1:7500:7500"
+    volumes:
+      - ./frps.toml:/etc/frp/frps.toml:ro
