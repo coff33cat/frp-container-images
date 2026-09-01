@@ -264,6 +264,10 @@ jobs:
             echo "Architectures: \`${PLATFORMS}\`"
             echo
             while read -r tag; do
-              [ -n "${tag}" ] && echo "- \`${tag}\`"
+              # A plain `[ -n ... ] && echo` would leave the loop -- and with it
+              # the whole step -- exiting non-zero on the trailing blank line.
+              if [ -n "${tag}" ]; then
+                echo "- \`${tag}\`"
+              fi
             done <<<"${TAGS}"
           } >>"${GITHUB_STEP_SUMMARY}"
