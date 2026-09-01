@@ -183,7 +183,7 @@ jobs:
       # smoke test runs before anything is published. The buildx builder stays
       # up for the whole job, so the multi-arch build below reuses these layers.
       - name: Build frps for testing
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: server
           load: true
@@ -191,7 +191,7 @@ jobs:
           build-args: FRP_VERSION=${{ needs.resolve.outputs.tag }}
 
       - name: Build frpc for testing
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: client
           load: true
@@ -205,7 +205,7 @@ jobs:
         run: hack/smoke-test.sh
 
       - name: Build and push frps
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: server
           platforms: ${{ env.PLATFORMS }}
@@ -218,7 +218,7 @@ jobs:
           sbom: true
 
       - name: Build and push frpc
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: client
           platforms: ${{ env.PLATFORMS }}
