@@ -5,7 +5,7 @@
 #   docker build --build-arg FRP_VERSION=v0.71.0 -t frpc:local client/
 
 ARG NODE_VERSION=24
-ARG GO_VERSION=1.25
+ARG GO_VERSION=1.26
 ARG ALPINE_VERSION=3
 ARG FRP_VERSION
 
