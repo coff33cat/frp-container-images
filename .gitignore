@@ -1,2 +1,5 @@
 *.local.toml
 *.local.yml
+
+# Local, machine-specific tunnels and compose setups.
+/local/
